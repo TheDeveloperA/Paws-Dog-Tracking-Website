@@ -21,7 +21,7 @@
         if ($count == 1){
            $_SESSION['login_user'] = "emailAddress";
 
-           header("location: welcome.php");
+           header("location: dashboard.php");
         }else{
 
             echo "Email or Password not recognised!";
