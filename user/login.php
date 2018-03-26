@@ -1,5 +1,5 @@
 <?php
-    include ("includes/Config.php");
+    include("includes/config.php");
 
     /*Creates a session, which is just a way to store data for individual users*/
     session_start();
