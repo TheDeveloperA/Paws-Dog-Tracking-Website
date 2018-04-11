@@ -19,7 +19,7 @@
 //        If login information is correct and user has registered, then it will return 1;
 
         if ($count == 1){
-           $_SESSION['login_user'] = "emailAddress";
+           $_SESSION['login_user'] = $emailAddress;
 
            header("location: dashboard.php");
         }else{
