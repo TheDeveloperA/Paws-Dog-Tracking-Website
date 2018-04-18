@@ -25,8 +25,6 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]><!---->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<!--    CDN for Charts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 </head>
 <body>
 <div id="all">
@@ -40,10 +38,10 @@
                     <div class="d-flex justify-content-md-end justify-content-between">
 
                         <div class="login"><a href="dashboard.php" class="login-btn"><i
-                                        class="fa fa-user-o"></i><span class="d-none d-md-inline-block">My Account</span></a>
+                                    class="fa fa-user-o"></i><span class="d-none d-md-inline-block">My Account</span></a>
                         </div>
 
-                        <div class="login"><a href="logout.php" class="login-btn"><i class="fa fa-sign-out"></i>
+                        <div class="login"><a href="logout.php" class="login-btn"><i class="fa fa-sign-in"></i>
                                 <span class="d-none d-md-inline-block">Log Out</span></a></div>
 
                         <ul class="social-custom list-inline">
@@ -88,12 +86,12 @@
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">My Account</h1>
+                    <h1 class="h2">Settings</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                        <li class="breadcrumb-item active">My Account</li>
+                        <li class="breadcrumb-item active">Settings</li>
                     </ul>
                 </div>
             </div>
@@ -104,13 +102,72 @@
         <div class="container">
             <div class="row bar">
                 <div id="customer-account" class="col-lg-9 clearfix">
+                    <p class="lead">Change your personal details or your password here.</p>
+                    <div class="box mt-5">
+                        <div class="heading">
+                            <h3 class="text-uppercase">Change password</h3>
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="password_old">Old password</label>
+                                        <input id="password_old" type="password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="password_1">New password</label>
+                                        <input id="password_1" type="password" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="password_2">Retype new password</label>
+                                        <input id="password_2" type="password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-template-outlined"><i class="fa fa-save"></i> Save new password</button>
+                            </div>
+                        </form>
+                    </div>
 
-                    <p>Hello [Your Name], from the dashboard you can monitor your dogs activity and see how many bark
-                    points they have earned.</p>
-                    <br>
-                    <canvas id="pie-chart" width="800" height="450"></canvas>
-
-
+                    <div class="box mt-5">
+                        <div class="heading">
+                            <h3 class="text-uppercase">Change Personal Details</h3>
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email_old">Email address</label>
+                                        <input id="email_old" type="email" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email_1">New email address</label>
+                                        <input id="email_1" type="email" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email_2">Retype new email</label>
+                                        <input id="email_2" type="email" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-template-outlined"><i class="fa fa-save"></i> Save new email address</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-lg-3 mt-4 mt-lg-0">
                     <!-- CUSTOMER MENU -->
@@ -120,9 +177,9 @@
                         </div>
                         <div class="panel-body">
                             <ul class="nav nav-pills flex-column text-sm">
-                                <li class="nav-item"><a href="dashboard.php" class="nav-link active"><i class="fa fa-list"></i> My Account</a></li>
+                                <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="fa fa-list"></i> My Account</a></li>
                                 <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-hand-o-up"></i> My Dog</a> </li>
-                                <li class="nav-item"><a href="settings.php" class="nav-link"><i class="fa fa-cog"></i> Settings</a></li>
+                                <li class="nav-item"><a href="settings.php" class="nav-link active"><i class="fa fa-cog"></i> Settings</a></li>
                                 <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out"></i> Log out</a> </li>
                             </ul>
                         </div>
@@ -159,26 +216,6 @@
     </footer>
 </div>
 <!-- Javascript files-->
-<script>
-    new Chart(document.getElementById("pie-chart"), {
-        type: 'pie',
-        data: {
-            labels: ["Minutes Played", "Minutes Active", "Minutes Rested"],
-            datasets: [{
-                label: "Population (millions)",
-                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-                data: [240,75,400]
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: 'Activity Level: Today'
-            }
-        }
-    });
-</script>
-
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/popper.js/umd/popper.min.js"> </script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>

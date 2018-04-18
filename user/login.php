@@ -1,3 +1,4 @@
+<!--This File is / should only be called when user incorrectly enters details-->
 <?php
     include("includes/config.php");
 
@@ -72,7 +73,6 @@
                 <div class="col-md-6 d-md-block d-none"></div>
                 <div class="col-md-6">
                     <div class="d-flex justify-content-md-end justify-content-between">
-                        <div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Sign In</span></a></div>
                         <ul class="social-custom list-inline">
                             <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>

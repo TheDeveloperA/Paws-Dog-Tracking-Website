@@ -23,8 +23,7 @@
         if ($count == 1){
             $_SESSION['login_user'] = $emailAddress;
 
-            header("location: index.php");
-//            header("location: user/dashboard.php");
+            header("location: user/dashboard.php");
         }else{
 
             header("location: user/login.php");
@@ -78,7 +77,10 @@
                                 if (empty($_SESSION['login_user'])){
                                     echo '<div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Sign In</span></a></div>';
                                 }else{
-                                    echo '<div class="login"><a href="user/logout.php"class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Log Out</span></a></div>';
+                                    echo '<div class="login"><a href="user/dashboard.php" class="login-btn"><i 
+                                            class="fa fa-user-o"></i><span class="d-none d-md-inline-block">My Account</span></a></div>';
+
+                                    echo '<div class="login"><a href="user/logout.php" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Log Out</span></a></div>';
                                 }
                             ?>
                             <ul class="social-custom list-inline">
