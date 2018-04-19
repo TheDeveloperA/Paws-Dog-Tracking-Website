@@ -178,9 +178,21 @@
                         <div class="panel-body">
                             <ul class="nav nav-pills flex-column text-sm">
                                 <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="fa fa-list"></i> My Account</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-hand-o-up"></i> My Dog</a> </li>
+                                <li class="nav-item"><a href="my_dog.php" class="nav-link"><i class="fa fa-hand-o-up"></i> My Dog</a> </li>
                                 <li class="nav-item"><a href="settings.php" class="nav-link active"><i class="fa fa-cog"></i> Settings</a></li>
                                 <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out"></i> Log out</a> </li>
+                            </ul>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="panel-heading">
+                            <h3 class="h4 panel-title">My Dogs Statistics</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills flex-column text-sm">
+                                <li class="nav-item"><a href="active_level.php" class="nav-link"><i class="fa fa-pie-chart"></i> Active Level</a></li>
+                                <li class="nav-item"><a href="minutes_played.php" class="nav-link"><i class="fa fa-line-chart"></i> Minutes Played</a> </li>
+                                <li class="nav-item"><a href="minutes_rest.php" class="nav-link"><i class="fa fa-bar-chart"></i> Minutes Rest</a></li>
                             </ul>
                         </div>
                     </div>

@@ -25,8 +25,6 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]><!---->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<!--    CDN for Charts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 </head>
 <body>
 <div id="all">
@@ -40,10 +38,10 @@
                     <div class="d-flex justify-content-md-end justify-content-between">
 
                         <div class="login"><a href="dashboard.php" class="login-btn"><i
-                                        class="fa fa-user-o"></i><span class="d-none d-md-inline-block">My Account</span></a>
+                                    class="fa fa-user-o"></i><span class="d-none d-md-inline-block">My Account</span></a>
                         </div>
 
-                        <div class="login"><a href="logout.php" class="login-btn"><i class="fa fa-sign-out"></i>
+                        <div class="login"><a href="logout.php" class="login-btn"><i class="fa fa-sign-in"></i>
                                 <span class="d-none d-md-inline-block">Log Out</span></a></div>
 
                         <ul class="social-custom list-inline">
@@ -88,12 +86,12 @@
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">My Account</h1>
+                    <h1 class="h2">My Dog</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                        <li class="breadcrumb-item active">My Account</li>
+                        <li class="breadcrumb-item active">My Dog</li>
                     </ul>
                 </div>
             </div>
@@ -104,17 +102,43 @@
         <div class="container">
             <div class="row bar">
                 <div id="customer-account" class="col-lg-9 clearfix">
-
-                    <p>Hello [Your Name], from the dashboard you can monitor your dogs activity and see how many bark
-                    points they have earned.</p>
-                    <br>
-                    <canvas id="pie-chart" width="800" height="450"></canvas>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <h4>Bark Points Target: 5000</h4>
-                    <h4>Bark Points Gained Today: 4843</h4>
+                    <p class="lead">Change your dogs details here.</p>
+                    <div class="box mt-5">
+                        <div class="heading">
+                            <h3 class="text-uppercase">Change Dogs Details</h3>
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dog_name">Dog Name</label>
+                                        <input id="dog_name" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dog_age">Dog Age</label>
+                                        <input id="dog_age" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dog_weight">Dog Weight</label>
+                                        <input id="dog_weight" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <br>
+                                <br>
+                                <button type="submit" class="btn btn-template-outlined"><i class="fa fa-save"></i> Save details</button>
+                            </div>
+                        </form>
+                    </div>
 
                 </div>
                 <div class="col-lg-3 mt-4 mt-lg-0">
@@ -125,8 +149,8 @@
                         </div>
                         <div class="panel-body">
                             <ul class="nav nav-pills flex-column text-sm">
-                                <li class="nav-item"><a href="dashboard.php" class="nav-link active"><i class="fa fa-list"></i> My Account</a></li>
-                                <li class="nav-item"><a href="my_dog.php" class="nav-link"><i class="fa fa-hand-o-up"></i> My Dog</a> </li>
+                                <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="fa fa-list"></i> My Account</a></li>
+                                <li class="nav-item"><a href="my_dog.php" class="nav-link active"><i class="fa fa-hand-o-up"></i> My Dog</a> </li>
                                 <li class="nav-item"><a href="settings.php" class="nav-link"><i class="fa fa-cog"></i> Settings</a></li>
                                 <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out"></i> Log out</a> </li>
                             </ul>
@@ -176,26 +200,6 @@
     </footer>
 </div>
 <!-- Javascript files-->
-<script>
-    new Chart(document.getElementById("pie-chart"), {
-        type: 'pie',
-        data: {
-            labels: ["Minutes Played", "Minutes Active", "Minutes Rested"],
-            datasets: [{
-                label: "Population (millions)",
-                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-                data: [240,75,400]
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: 'Activity Level: Today'
-            }
-        }
-    });
-</script>
-
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/popper.js/umd/popper.min.js"> </script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>

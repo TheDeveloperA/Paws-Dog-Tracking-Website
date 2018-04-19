@@ -25,7 +25,7 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]><!---->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<!--    CDN for Charts-->
+    <!--    CDN for Charts-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 </head>
 <body>
@@ -40,7 +40,7 @@
                     <div class="d-flex justify-content-md-end justify-content-between">
 
                         <div class="login"><a href="dashboard.php" class="login-btn"><i
-                                        class="fa fa-user-o"></i><span class="d-none d-md-inline-block">My Account</span></a>
+                                    class="fa fa-user-o"></i><span class="d-none d-md-inline-block">My Account</span></a>
                         </div>
 
                         <div class="login"><a href="logout.php" class="login-btn"><i class="fa fa-sign-out"></i>
@@ -76,7 +76,7 @@
                         <li class="nav-item menu-large"><a href="#">Features <b class="caret"></b></a></li>
                         <li class="nav-item menu-large"><a href="#">Download <b class="caret"></b></a></li>
                         <li class="nav-item menu-large"><a href="#">About Us <b class="caret"></b></a></li>
-                        <li class="nav-item"><a href="javascript: void(0)">Contact Us<b class="caret"></b></a></li>
+                        <li class="nav-item"><a href="#">Contact Us<b class="caret"></b></a></li>
                     </ul>
                 </div>
             </div>
@@ -88,12 +88,12 @@
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">My Account</h1>
+                    <h1 class="h2">Minutes Played</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                        <li class="breadcrumb-item active">My Account</li>
+                        <li class="breadcrumb-item active">Minutes Played</li>
                     </ul>
                 </div>
             </div>
@@ -105,16 +105,14 @@
             <div class="row bar">
                 <div id="customer-account" class="col-lg-9 clearfix">
 
-                    <p>Hello [Your Name], from the dashboard you can monitor your dogs activity and see how many bark
-                    points they have earned.</p>
+                    <p>Here you can check out how many minutes your dog plays for!
+                        You can access legacy information as well as check out the current days progress</p>
                     <br>
-                    <canvas id="pie-chart" width="800" height="450"></canvas>
-                    <br>
-                    <br>
+                    <canvas id="line-chart" width="800" height="450"></canvas>
                     <br>
                     <br>
-                    <h4>Bark Points Target: 5000</h4>
-                    <h4>Bark Points Gained Today: 4843</h4>
+                    <br>
+                    <br>
 
                 </div>
                 <div class="col-lg-3 mt-4 mt-lg-0">
@@ -125,7 +123,7 @@
                         </div>
                         <div class="panel-body">
                             <ul class="nav nav-pills flex-column text-sm">
-                                <li class="nav-item"><a href="dashboard.php" class="nav-link active"><i class="fa fa-list"></i> My Account</a></li>
+                                <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="fa fa-list"></i> My Account</a></li>
                                 <li class="nav-item"><a href="my_dog.php" class="nav-link"><i class="fa fa-hand-o-up"></i> My Dog</a> </li>
                                 <li class="nav-item"><a href="settings.php" class="nav-link"><i class="fa fa-cog"></i> Settings</a></li>
                                 <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out"></i> Log out</a> </li>
@@ -139,7 +137,7 @@
                         <div class="panel-body">
                             <ul class="nav nav-pills flex-column text-sm">
                                 <li class="nav-item"><a href="active_level.php" class="nav-link"><i class="fa fa-pie-chart"></i> Active Level</a></li>
-                                <li class="nav-item"><a href="minutes_played.php" class="nav-link"><i class="fa fa-line-chart"></i> Minutes Played</a> </li>
+                                <li class="nav-item"><a href="minutes_played.php" class="nav-link active"><i class="fa fa-line-chart"></i> Minutes Played</a> </li>
                                 <li class="nav-item"><a href="minutes_rest.php" class="nav-link"><i class="fa fa-bar-chart"></i> Minutes Rest</a></li>
                             </ul>
                         </div>
@@ -177,20 +175,22 @@
 </div>
 <!-- Javascript files-->
 <script>
-    new Chart(document.getElementById("pie-chart"), {
-        type: 'pie',
+    new Chart(document.getElementById("line-chart"), {
+        type: 'line',
         data: {
-            labels: ["Minutes Played", "Minutes Active", "Minutes Rested"],
+            labels: [50,100,150,200,250,300,350,400,450,500],
             datasets: [{
-                label: "Population (millions)",
-                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-                data: [240,75,400]
-            }]
+                data: [86,114,106,106,107,111,133,221],
+                label: "Africa",
+                borderColor: "#3e95cd",
+                fill: true
+            }
+            ]
         },
         options: {
             title: {
                 display: true,
-                text: 'Activity Level: Today'
+                text: 'World population per region (in millions)'
             }
         }
     });
