@@ -1042,7 +1042,7 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="243" name="dogs_min_date">
+    <column id="257" parent="243" name="dogs_date">
       <Position>7</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
@@ -1060,19 +1060,25 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="260" parent="244" name="users_email">
+    <column id="260" parent="244" name="users_name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="261" parent="244" name="users_pass">
+    <column id="261" parent="244" name="users_email">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="262" parent="244" name="PRIMARY">
+    <column id="262" parent="244" name="users_pass">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="263" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>users_id</ColNames>
       <Primary>1</Primary>

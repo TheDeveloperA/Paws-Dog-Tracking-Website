@@ -108,6 +108,31 @@
                     <p>Here you can check out how many minutes your dog rests for!
                         You can access legacy information as well as check out the current days progress</p>
                     <br>
+                    <div id="heading-breadcrumbs">
+                        <div class="container">
+                            <div class="row d-flex align-items-center flex-wrap">
+                                <div class="col-md-7">
+                                </div>
+                                <div class="col-md-5">
+
+                                    <div class="dropdown breadcrumb d-flex justify-content-end">
+
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                style="color: white">
+                                            Today
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">7 days</a>
+                                            <a class="dropdown-item" href="#">14 days</a>
+                                            <a class="dropdown-item" href="#">30 days</a>
+                                            <a class="dropdown-item" href="#">Custom</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <canvas id="bar-chart" width="800" height="450"></canvas>
                     <br>
                     <br>

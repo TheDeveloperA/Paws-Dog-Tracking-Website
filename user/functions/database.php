@@ -10,7 +10,7 @@
  */
 
 // Contains information to connect to DB.
-include ("../includes/config.php");
+require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
 
     /**
@@ -56,4 +56,43 @@ include ("../includes/config.php");
 
         return array($dogs_info_id,$dogs_info_dogs_identifier,$dogs_hourly_average,$dogs_min_play,$dogs_min_active,
             $dogs_min_rest,$dogs_date);
+    }
+
+    /**
+     * @param $email_address - the email address associated with the account.
+     * @return mixed - returns the users name save on database.
+     */
+    function getNameFromDB($email_address){
+
+        global $db;
+
+        $sql_query = "SELECT * FROM users WHERE users_email =  '$email_address' ";
+        $result = mysqli_query($db,$sql_query);
+
+        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+        if ($row > 0){
+
+            $users_name = $row["users_name"];
+
+            return $users_name;
+
+        }else{
+
+            return "null";
+        }
+
+    }
+
+    function insertNewName($email_Address,$name){
+
+        global $db;
+
+        $sql_query = "UPDATE users SET users_name = '$name' WHERE users_email = '$email_Address'";
+
+        if (mysqli_query($db,$sql_query)){
+            echo "saved";
+        }else{
+            echo "error";
+        }
     }

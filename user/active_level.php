@@ -125,6 +125,7 @@
                                             <a class="dropdown-item" href="#">7 days</a>
                                             <a class="dropdown-item" href="#">14 days</a>
                                             <a class="dropdown-item" href="#">30 days</a>
+                                            <a class="dropdown-item" href="#">Custom</a>
                                         </div>
                                     </div>
 

@@ -1,3 +1,18 @@
+<?php
+include ('functions/database.php');
+/*Creates a session, which is just a way to store data for individual users*/
+session_start();
+
+if (isset($_POST['save_name'])){
+
+    $varName = $_POST['formName'];
+
+    if (!empty($varName)){
+        insertNewName($_SESSION['login_user'],$varName);
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +40,7 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]><!---->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div id="all">
@@ -131,14 +147,33 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-template-outlined"><i class="fa fa-save"></i> Save new password</button>
+                                <button type="submit" id="save_pass" class="btn btn-template-outlined"><i class="fa fa-save"></i> Save new password</button>
                             </div>
                         </form>
                     </div>
 
                     <div class="box mt-5">
                         <div class="heading">
-                            <h3 class="text-uppercase">Change Personal Details</h3>
+                            <h3 class="text-uppercase">Change Name</h3>
+                        </div>
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="formName">Name</label>
+                                        <input id="formName" name="formName" type="text" class="form-control" value="<?php echo getNameFromDB($_SESSION['login_user'])?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-template-outlined" name="save_name"><i class="fa fa-save" ></i> Save name</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="box mt-5">
+                        <div class="heading">
+                            <h3 class="text-uppercase">Change Email Address</h3>
                         </div>
                         <form>
                             <div class="row">
@@ -228,6 +263,24 @@
     </footer>
 </div>
 <!-- Javascript files-->
+<script>
+
+//    TODO GET THE SUBMIT PASS BUTTON TO WORK TO CHECK BEFORE SUBMMITTING
+    $('#save_pass').submit(function () {
+        document.write("test");
+        if (document.getElementById("password_1") === document.getElementById('password_2')){
+
+            document.write("yeah boy");
+            return true;
+
+        }else {
+            document.write("no boy");
+            return false;
+        }
+
+    })
+
+</script>
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/popper.js/umd/popper.min.js"> </script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
