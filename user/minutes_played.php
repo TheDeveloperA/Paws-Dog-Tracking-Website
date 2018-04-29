@@ -1,3 +1,21 @@
+<?php
+include "functions/database.php";
+session_start();
+
+$array = getDogsDataFor30days($_SESSION['login_user']);
+
+$index = 0;
+
+foreach ($array as $row){
+
+    $minutesPlayedArray[$index] = $row[4];
+    $minutesRestDates[$index] = $row[6];
+
+    $index++;
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +66,6 @@
 
                         <ul class="social-custom list-inline">
                             <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
                         </ul>
@@ -108,32 +125,6 @@
                     <p>Here you can check out how many minutes your dog plays for!
                         You can access legacy information as well as check out the current days progress</p>
                     <br>
-                    <div id="heading-breadcrumbs">
-                        <div class="container">
-                            <div class="row d-flex align-items-center flex-wrap">
-                                <div class="col-md-7">
-                                </div>
-                                <div class="col-md-5">
-
-                                    <div class="dropdown breadcrumb d-flex justify-content-end">
-
-                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                style="color: white">
-                                            Today
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">7 days</a>
-                                            <a class="dropdown-item" href="#">14 days</a>
-                                            <a class="dropdown-item" href="#">30 days</a>
-                                            <a class="dropdown-item" href="#">Custom</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <canvas id="line-chart" width="800" height="450"></canvas>
                     <br>
                     <br>
@@ -204,19 +195,35 @@
     new Chart(document.getElementById("line-chart"), {
         type: 'line',
         data: {
-            labels: [50,100,150,200,250,300,350,400,450,500],
+            labels: [
+                <?php
+                foreach ($minutesRestDates as $row){
+
+                    echo  "'" . $row . "',";
+                }
+                ?>],
             datasets: [{
-                data: [86,114,106,106,107,111,133,221],
-                label: "Africa",
+                data: [
+                    <?php
+
+                    foreach ($minutesPlayedArray as $row){
+
+                        echo $row . ",";
+                    }
+
+
+                    ?>
+                ],
+                label: "Minutes played",
                 borderColor: "#3e95cd",
-                fill: true
+                fill: false
             }
             ]
         },
         options: {
             title: {
                 display: true,
-                text: 'World population per region (in millions)'
+                text: 'Minutes played in the last 30 days'
             }
         }
     });

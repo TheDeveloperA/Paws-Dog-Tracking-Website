@@ -1,3 +1,37 @@
+<?php
+
+include("functions/database.php");
+
+session_start();
+
+$dog_info_array = getDogs(getEmailFromDB($_SESSION['login_user']));
+
+$dogName = $dog_info_array[2];
+$dogAge = $dog_info_array[3];
+$dogWeight = $dog_info_array[4];
+
+
+if (isset($_POST['save_info'])){
+
+    $dogName = $_POST['form_dog_name'];
+    $dogAge = $_POST['form_dog_age'];
+    $dogWeight = $_POST['form_dog_weight'];
+
+    if (!empty($dogName)){
+        insertDogName(getEmailFromDB($_SESSION['login_user']),$dogName);
+    }
+
+    if (!empty($dogAge)){
+        insertDogAge(getEmailFromDB($_SESSION['login_user']),$dogAge);
+    }
+
+    if (!empty($dogWeight)){
+        insertDogWeight(getEmailFromDB($_SESSION['login_user']),$dogWeight);
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +80,6 @@
 
                         <ul class="social-custom list-inline">
                             <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
                         </ul>
@@ -107,12 +140,12 @@
                         <div class="heading">
                             <h3 class="text-uppercase">Change Dogs Details</h3>
                         </div>
-                        <form>
+                        <form method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="dog_name">Dog Name</label>
-                                        <input id="dog_name" type="text" class="form-control">
+                                        <input id="dog_name" type="text" class="form-control" name="form_dog_name" value="<?php echo $dogName?> ">
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +153,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="dog_age">Dog Age</label>
-                                        <input id="dog_age" type="text" class="form-control">
+                                        <input id="dog_age" type="text" class="form-control" name="form_dog_age" value="<?php echo $dogAge?> ">
                                     </div>
                                 </div>
                             </div>
@@ -128,14 +161,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="dog_weight">Dog Weight</label>
-                                        <input id="dog_weight" type="text" class="form-control">
+                                        <input id="dog_weight" type="text" class="form-control" name="form_dog_weight" value="<?php echo $dogWeight?> ">
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <br>
                                 <br>
-                                <button type="submit" class="btn btn-template-outlined"><i class="fa fa-save"></i> Save details</button>
+                                <button type="submit" class="btn btn-template-outlined" name="save_info">
+                                    <i class="fa fa-save"></i> Save details</button>
                             </div>
                         </form>
                     </div>

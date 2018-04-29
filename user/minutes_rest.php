@@ -1,3 +1,22 @@
+<?php
+include "functions/database.php";
+session_start();
+
+$array = getDogsDataFor30days($_SESSION['login_user']);
+
+$index = 0;
+
+foreach ($array as $row){
+
+    $minutesRestArray[$index] = $row[5];
+    $minutesRestDates[$index] = $row[6];
+
+    $index++;
+
+}
+//TODO the array contains all the data for last 30 days, add to the chart, perhaps loop through and append.
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +67,6 @@
 
                         <ul class="social-custom list-inline">
                             <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
                         </ul>
@@ -108,31 +126,6 @@
                     <p>Here you can check out how many minutes your dog rests for!
                         You can access legacy information as well as check out the current days progress</p>
                     <br>
-                    <div id="heading-breadcrumbs">
-                        <div class="container">
-                            <div class="row d-flex align-items-center flex-wrap">
-                                <div class="col-md-7">
-                                </div>
-                                <div class="col-md-5">
-
-                                    <div class="dropdown breadcrumb d-flex justify-content-end">
-
-                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                style="color: white">
-                                            Today
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">7 days</a>
-                                            <a class="dropdown-item" href="#">14 days</a>
-                                            <a class="dropdown-item" href="#">30 days</a>
-                                            <a class="dropdown-item" href="#">Custom</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <canvas id="bar-chart" width="800" height="450"></canvas>
                     <br>
                     <br>
@@ -204,12 +197,30 @@
     new Chart(document.getElementById("bar-chart"), {
         type: 'bar',
         data: {
-            labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+
+            labels: [<?php
+
+                foreach ($minutesRestDates as $row){
+
+                    echo  "'" . $row . "',";
+                }
+
+                ?>],
             datasets: [
                 {
-                    label: "Population (millions)",
+                    label: "Minutes rested",
                     backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                    data: [2478,5267,734,784,433]
+                    data: [
+                        <?php
+
+                            foreach ($minutesRestArray as $row){
+
+                                echo $row . ",";
+                            }
+
+
+                        ?>
+                    ]
                 }
             ]
         },
@@ -217,12 +228,11 @@
             legend: { display: false },
             title: {
                 display: true,
-                text: 'Predicted world population (millions) in 2050'
+                text: 'Minutes Rested in the last 30 days'
             }
         }
     });
 </script>
-
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/popper.js/umd/popper.min.js"> </script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>

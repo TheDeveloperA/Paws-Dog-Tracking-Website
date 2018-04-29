@@ -1,33 +1,13 @@
 <?php
-include ('functions/database.php');
-/*Creates a session, which is just a way to store data for individual users*/
+include ("functions/database.php");
+
 session_start();
 
-if (isset($_POST['save_name'])){
-
-    $varName = $_POST['formName'];
-
-    if (!empty($varName)){
-        insertNewName($_SESSION['login_user'],$varName);
-    }
-
-}else if (isset($_POST['save_pass'])){
-
-    $varName = $_POST['form_pass'];
-
-    if (!empty($varName)){
-
-        insertNewPass($_SESSION['login_user'],$varName);
-    }
-}else if (isset($_POST['save_email'])){
-
-    $varName = $_POST['form_email'];
-
-    if (!empty($varName)){
-        insertNewEmail($_SESSION['login_user'],$varName);
-    }
-}
+$minActive = getDogsMinActive($_SESSION['login_user'],14);
+$minRest = getDogsMinRest($_SESSION['login_user'],14);
+$minPlay = getDogsMinPlay($_SESSION['login_user'],14);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +36,8 @@ if (isset($_POST['save_name'])){
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--    CDN for Charts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 </head>
 <body>
 <div id="all">
@@ -72,7 +54,7 @@ if (isset($_POST['save_name'])){
                                     class="fa fa-user-o"></i><span class="d-none d-md-inline-block">My Account</span></a>
                         </div>
 
-                        <div class="login"><a href="logout.php" class="login-btn"><i class="fa fa-sign-in"></i>
+                        <div class="login"><a href="logout.php" class="login-btn"><i class="fa fa-sign-out"></i>
                                 <span class="d-none d-md-inline-block">Log Out</span></a></div>
 
                         <ul class="social-custom list-inline">
@@ -104,7 +86,7 @@ if (isset($_POST['save_name'])){
                         <li class="nav-item menu-large"><a href="#">Features <b class="caret"></b></a></li>
                         <li class="nav-item menu-large"><a href="#">Download <b class="caret"></b></a></li>
                         <li class="nav-item menu-large"><a href="#">About Us <b class="caret"></b></a></li>
-                        <li class="nav-item"><a href="javascript: void(0)">Contact Us<b class="caret"></b></a></li>
+                        <li class="nav-item"><a href="#">Contact Us<b class="caret"></b></a></li>
                     </ul>
                 </div>
             </div>
@@ -116,12 +98,12 @@ if (isset($_POST['save_name'])){
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">Settings</h1>
+                    <h1 class="h2">Active Level</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                        <li class="breadcrumb-item active">Settings</li>
+                        <li class="breadcrumb-item active">Active Level</li>
                     </ul>
                 </div>
             </div>
@@ -132,93 +114,38 @@ if (isset($_POST['save_name'])){
         <div class="container">
             <div class="row bar">
                 <div id="customer-account" class="col-lg-9 clearfix">
-                    <p class="lead">Change your personal details or your password here.</p>
-                    <div class="box mt-5">
-                        <div class="heading">
-                            <h3 class="text-uppercase">Change password</h3>
-                        </div>
-                        <form method="post">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="password_old">Old password</label>
-                                        <input id="password_old" type="password" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="password_1">New password</label>
-                                        <input id="password_1" type="password" class="form-control" name="form_pass">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="password_2">Retype new password</label>
-                                        <input id="password_2" type="password" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-template-outlined" name="save_pass">
-                                    <i class="fa fa-save"></i> Save new password</button>
-                            </div>
-                        </form>
-                    </div>
 
-                    <div class="box mt-5">
-                        <div class="heading">
-                            <h3 class="text-uppercase">Change Name</h3>
-                        </div>
-                        <form method="post">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="formName">Name</label>
-                                        <input id="formName" name="formName" type="text" class="form-control" value="<?php echo getNameFromDB($_SESSION['login_user'])?>">
-                                    </div>
+                    <p>The Active Level section will display your dags active level. You can access legacy information
+                        as well as check out the current days progress</p>
+                    <br>
+                    <div id="heading-breadcrumbs">
+                        <div class="container">
+                            <div class="row d-flex align-items-center flex-wrap">
+                                <div class="col-md-7">
                                 </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-template-outlined" name="save_name"><i class="fa fa-save" ></i> Save name</button>
-                            </div>
-                        </form>
-                    </div>
+                                <div class="col-md-5">
 
-                    <div class="box mt-5">
-                        <div class="heading">
-                            <h3 class="text-uppercase">Change Email Address</h3>
+                                    <div class="dropdown breadcrumb d-flex justify-content-end">
+
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                style="color: white">14 days</button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="active_level.php">Today</a>
+                                            <a class="dropdown-item" href="active_level_7.php">7 days</a>
+                                            <a class="dropdown-item" href="active_level_30.php">30 days</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                        <form method="post">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="email_old">Email address</label>
-                                        <input id="email_old" type="email" class="form-control" value="<?php echo getEmailFromDB($_SESSION['login_user'])?>">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="email_1">New email address</label>
-                                        <input id="email_1" type="email" class="form-control" name="form_email">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="email_2">Retype new email</label>
-                                        <input id="email_2" type="email" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-template-outlined" name="save_email">
-                                    <i class="fa fa-save"></i> Save new email address</button>
-                            </div>
-                        </form>
                     </div>
+                    <canvas id="pie-chart" width="800" height="450"></canvas>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
                 </div>
                 <div class="col-lg-3 mt-4 mt-lg-0">
                     <!-- CUSTOMER MENU -->
@@ -230,7 +157,7 @@ if (isset($_POST['save_name'])){
                             <ul class="nav nav-pills flex-column text-sm">
                                 <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="fa fa-list"></i> My Account</a></li>
                                 <li class="nav-item"><a href="my_dog.php" class="nav-link"><i class="fa fa-hand-o-up"></i> My Dog</a> </li>
-                                <li class="nav-item"><a href="settings.php" class="nav-link active"><i class="fa fa-cog"></i> Settings</a></li>
+                                <li class="nav-item"><a href="settings.php" class="nav-link"><i class="fa fa-cog"></i> Settings</a></li>
                                 <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out"></i> Log out</a> </li>
                             </ul>
                         </div>
@@ -241,7 +168,7 @@ if (isset($_POST['save_name'])){
                         </div>
                         <div class="panel-body">
                             <ul class="nav nav-pills flex-column text-sm">
-                                <li class="nav-item"><a href="active_level.php" class="nav-link"><i class="fa fa-pie-chart"></i> Active Level</a></li>
+                                <li class="nav-item"><a href="active_level.php" class="nav-link active"><i class="fa fa-pie-chart"></i> Active Level</a></li>
                                 <li class="nav-item"><a href="minutes_played.php" class="nav-link"><i class="fa fa-line-chart"></i> Minutes Played</a> </li>
                                 <li class="nav-item"><a href="minutes_rest.php" class="nav-link"><i class="fa fa-bar-chart"></i> Minutes Rest</a></li>
                             </ul>
@@ -279,24 +206,30 @@ if (isset($_POST['save_name'])){
     </footer>
 </div>
 <!-- Javascript files-->
-<!--<script>-->
-<!---->
-<!--//    TODO GET THE SUBMIT PASS BUTTON TO WORK TO CHECK BEFORE SUBMMITTING-->
-<!--    $('#save_pass').submit(function () {-->
-<!--        document.write("test");-->
-<!--        if (document.getElementById("password_1") === document.getElementById('password_2')){-->
-<!---->
-<!--            document.write("yeah boy");-->
-<!--            return true;-->
-<!---->
-<!--        }else {-->
-<!--            document.write("no boy");-->
-<!--            return false;-->
-<!--        }-->
-<!---->
-<!--    })-->
-<!---->
-<!--</script>-->
+<script>
+
+    //  return array($dogs_info_id,$dogs_info_dogs_identifier,$dogs_hourly_average,$dogs_min_play,$dogs_min_active,
+    //            $dogs_min_rest,$dogs_date);
+
+    new Chart(document.getElementById("pie-chart"), {
+        type: 'pie',
+        data: {
+            labels: ["Minutes Played", "Minutes Active", "Minutes Rested"],
+            datasets: [{
+                label: "Active Level",
+                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+                data: [<?php echo $minPlay?>,<?php echo $minActive ?>,<?php echo $minRest?>]
+
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Activity Level: 14 days'
+            }
+        }
+    });
+</script>
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/popper.js/umd/popper.min.js"> </script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>

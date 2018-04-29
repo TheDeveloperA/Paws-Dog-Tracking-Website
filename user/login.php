@@ -1,31 +1,34 @@
 <!--This File is / should only be called when user incorrectly enters details-->
 <?php
     include("includes/config.php");
-
+    include ("functions/database.php");
     /*Creates a session, which is just a way to store data for individual users*/
     session_start();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $emailAddress = mysqli_real_escape_string($db,$_POST['email']);
-        $password = mysqli_real_escape_string($db,$_POST["pass"]);
+        if (isset($_POST['login'])){
 
-        $sql_query = "SELECT users_id FROM users WHERE users_email = '$emailAddress' AND users_pass = '$password'";
-        $result = mysqli_query($db,$sql_query);
-        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        $active = $row['active'];
+            $emailAddress = mysqli_real_escape_string($db,$_POST['email']);
+            $password = mysqli_real_escape_string($db,$_POST["pass"]);
 
-        $count = mysqli_num_rows($result);
+            $sql_query = "SELECT users_id FROM users WHERE users_email = '$emailAddress' AND users_pass = '$password'";
+            $result = mysqli_query($db,$sql_query);
+            $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+            $count = mysqli_num_rows($result);
 
 //        If login information is correct and user has registered, then it will return 1;
 
-        if ($count == 1){
-           $_SESSION['login_user'] = $emailAddress;
+            if ($count == 1){
+                $_SESSION['login_user'] = getIDFromDB($emailAddress);
 
-           header("location: dashboard.php");
-        }else{
+                header("location: dashboard.php");
+            }else{
 
-            header("location: user/login.php");
+                header("location: login.php");
+            }
+
         }
 
     }
@@ -75,7 +78,6 @@
                     <div class="d-flex justify-content-md-end justify-content-between">
                         <ul class="social-custom list-inline">
                             <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
                         </ul>
@@ -128,17 +130,18 @@
                     <div class="box">
                         <h2 class="text-uppercase">Login</h2>
                         <p style="color: red;">*Incorrect Email / Password entered</p>
-                        <form action="customer-orders.html" method="post">
+                        <form method="post">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" type="text" class="form-control">
+                                <input id="email" type="text" class="form-control" name="email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input id="password" type="password" class="form-control">
+                                <input id="password" type="password" class="form-control" name="pass">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Log in</button>
+                                <button type="submit" class="btn btn-template-outlined"
+                                name="login"><i class="fa fa-sign-in"></i> Log in</button>
                             </div>
                         </form>
                     </div>

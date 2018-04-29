@@ -2,6 +2,8 @@
 
 //Creates login script
     include("user/includes/config.php");
+    include("user/functions/database.php");
+
 
     /*Creates a session, which is just a way to store data for individual users*/
     session_start();
@@ -21,7 +23,9 @@
     //        If login information is correct and user has registered, then it will return 1;
 
         if ($count == 1){
-            $_SESSION['login_user'] = $emailAddress;
+
+
+            $_SESSION['login_user'] = getIDFromDB($emailAddress);
 
             header("location: user/dashboard.php");
         }else{
@@ -85,7 +89,6 @@
                             ?>
                             <ul class="social-custom list-inline">
                                 <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                 <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
                             </ul>

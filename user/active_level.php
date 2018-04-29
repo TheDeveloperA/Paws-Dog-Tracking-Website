@@ -1,3 +1,15 @@
+<?php
+include ("functions/database.php");
+
+session_start();
+
+$minActive = getDogsMinActive($_SESSION['login_user'],1);
+$minRest = getDogsMinRest($_SESSION['login_user'],1);
+$minPlay = getDogsMinPlay($_SESSION['login_user'],1);
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +37,7 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]><!---->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--    CDN for Charts-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 </head>
@@ -48,7 +61,6 @@
 
                         <ul class="social-custom list-inline">
                             <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
                         </ul>
@@ -118,14 +130,11 @@
                                     <div class="dropdown breadcrumb d-flex justify-content-end">
 
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                        style="color: white">
-                                                Today
-                                        </button>
+                                        style="color: white">Today</button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">7 days</a>
-                                            <a class="dropdown-item" href="#">14 days</a>
-                                            <a class="dropdown-item" href="#">30 days</a>
-                                            <a class="dropdown-item" href="#">Custom</a>
+                                            <a class="dropdown-item" href="active_level_7.php">7 days</a>
+                                            <a class="dropdown-item" href="active_level_14.php">14 days</a>
+                                            <a class="dropdown-item" href="active_level_30.php">30 days</a>
                                         </div>
                                     </div>
 
@@ -133,7 +142,14 @@
                             </div>
                         </div>
                     </div>
-                    <canvas id="pie-chart" width="800" height="450"></canvas>
+                    <?php
+                    if (empty($minRest)){
+                        echo "No data available";
+                    }else{
+                        echo '<canvas id="pie-chart" width="800" height="450"></canvas>';
+                    }
+                    ?>
+
                     <br>
                     <br>
                     <br>
@@ -200,14 +216,19 @@
 </div>
 <!-- Javascript files-->
 <script>
+
+    //  return array($dogs_info_id,$dogs_info_dogs_identifier,$dogs_hourly_average,$dogs_min_play,$dogs_min_active,
+    //            $dogs_min_rest,$dogs_date);
+
     new Chart(document.getElementById("pie-chart"), {
         type: 'pie',
         data: {
             labels: ["Minutes Played", "Minutes Active", "Minutes Rested"],
             datasets: [{
-                label: "Population (millions)",
+                label: "Active Level",
                 backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-                data: [240,75,400]
+                data: [<?php echo $minPlay?>,<?php echo $minActive?>,<?php echo $minRest?>]
+
             }]
         },
         options: {
@@ -218,7 +239,6 @@
         }
     });
 </script>
-
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/popper.js/umd/popper.min.js"> </script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>

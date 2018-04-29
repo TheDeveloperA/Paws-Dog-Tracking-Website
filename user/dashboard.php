@@ -1,3 +1,9 @@
+<?php
+
+include "functions/database.php";
+
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,7 +110,7 @@
             <div class="row bar">
                 <div id="customer-account" class="col-lg-9 clearfix">
 
-                    <p>Hello [Your Name], from the dashboard you can monitor your dogs activity and see how many bark
+                    <p>Hello <?php echo getNameFromDB($_SESSION['login_user'])?>, from the dashboard you can monitor your dogs activity and see how many bark
                     points they have earned.</p>
                     <br>
                     <canvas id="pie-chart" width="800" height="450"></canvas>
