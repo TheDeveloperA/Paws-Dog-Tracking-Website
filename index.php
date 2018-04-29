@@ -69,35 +69,9 @@
 <body>
 
     <div id="all">
-        <!-- Top bar-->
-        <div class="top-bar">
-            <div class="container">
-                <div class="row d-flex align-items-center">
-                    <!--The below is intentionally left blank to add a space-->
-                    <div class="col-md-6 d-md-block d-none"></div>
-                    <div class="col-md-6">
-                        <div class="d-flex justify-content-md-end justify-content-between">
-                            <?php
-                                if (empty($_SESSION['login_user'])){
-                                    echo '<div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Sign In</span></a></div>';
-                                }else{
-                                    echo '<div class="login"><a href="user/dashboard.php" class="login-btn"><i 
-                                            class="fa fa-user-o"></i><span class="d-none d-md-inline-block">My Account</span></a></div>';
-
-                                    echo '<div class="login"><a href="user/logout.php" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Log Out</span></a></div>';
-                                }
-                            ?>
-                            <ul class="social-custom list-inline">
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Top bar end-->
+        <?php
+        include ("components/top_bar.php");
+        ?>
         <!--This used to provide the popup when login button is pressed-->
         <!-- Login Modal-->
         <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
@@ -134,10 +108,8 @@
                     <div id="navigation" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active"><a href="javascript: void(0)" >Home <b class="caret"></b></a></li>
-                            <li class="nav-item menu-large"><a href="#">Features <b class="caret"></b></a></li>
-                            <li class="nav-item menu-large"><a href="#">Download <b class="caret"></b></a></li>
-                            <li class="nav-item menu-large"><a href="#">About Us <b class="caret"></b></a></li>
-                            <li class="nav-item"><a href="javascript: void(0)">Contact Us<b class="caret"></b></a></li>
+                            <li class="nav-item menu-large"><a href="about_us.php">About Us <b class="caret"></b></a></li>
+                            <li class="nav-item"><a href="contact_us.php">Contact Us<b class="caret"></b></a></li>
                         </ul>
                     </div>
                 </div>
@@ -221,32 +193,9 @@
             </div>
         </section>
 
-        <!-- GET IT-->
-        <div class="get-it">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 text-center p-3">
-                        <h3>Download our App now on the Play Store!</h3>
-                    </div>
-                    <div class="col-lg-4 text-center p-3">   <a href="#" class="btn btn-template-outlined-white">Open Play Store</a></div>
-                </div>
-            </div>
-        </div>
-        <!-- FOOTER -->
-        <footer class="main-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 text-center-md">
-                        <p>&copy; 2018. Your company / name goes here</p>
-                    </div>
-
-                    <div class="col-lg-8 text-right text-center-md">
-                        <p>With the help of <a href="https://bootstrapious.com/free-templates">Bootstrapious Templates </a></p>
-                        <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <?php
+        include ("components/footer.php");
+        ?>
     </div>
     <!-- Javascript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
