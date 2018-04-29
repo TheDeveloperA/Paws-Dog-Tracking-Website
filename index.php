@@ -42,7 +42,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Universal - All In 1 Template</title>
+    <title>Paws</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -142,7 +142,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 order-lg-2">
                         <div class="p-5">
-                            <img class="img-fluid rounded-circle" src="img/02.jpg" alt="">
+                            <img class="img-fluid rounded-circle" src="img/dog.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
@@ -160,7 +160,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="p-5">
-                            <img class="img-fluid rounded-circle" src="img/03.jpg" alt="">
+                            <img class="img-fluid rounded-circle" src="img/puppy.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg-6">
