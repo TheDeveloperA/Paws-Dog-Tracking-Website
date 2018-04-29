@@ -48,6 +48,12 @@ foreach ($array as $row){
 </head>
 <body>
 <div id="all">
+
+    <?php
+    if (empty($_SESSION['login_user'])){
+        header("location: login.php");
+    }
+    ?>
     <?php
     include ("../components/top_bar.php");
     ?>
@@ -66,10 +72,8 @@ foreach ($array as $row){
                 <div id="navigation" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item"><a href="../index.php" >Home <b class="caret"></b></a></li>
-                        <li class="nav-item menu-large"><a href="#">Features <b class="caret"></b></a></li>
-                        <li class="nav-item menu-large"><a href="#">Download <b class="caret"></b></a></li>
-                        <li class="nav-item menu-large"><a href="#">About Us <b class="caret"></b></a></li>
-                        <li class="nav-item"><a href="#">Contact Us<b class="caret"></b></a></li>
+                        <li class="nav-item menu-large"><a href="../about_us.php">About Us <b class="caret"></b></a></li>
+                        <li class="nav-item"><a href="../contact_us.php">Contact Us<b class="caret"></b></a></li>
                     </ul>
                 </div>
             </div>

@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 text-center-md">
-                <p>&copy; 2018. Your company / name goes here</p>
+                <p>Paws Team &copy; 2018</p>
             </div>
 
             <div class="col-lg-8 text-right text-center-md">

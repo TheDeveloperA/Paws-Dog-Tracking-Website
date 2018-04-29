@@ -79,11 +79,9 @@
                 <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
                 <div id="navigation" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="javascript: void(0)" >Home <b class="caret"></b></a></li>
-                        <li class="nav-item menu-large"><a href="#">Features <b class="caret"></b></a></li>
-                        <li class="nav-item menu-large"><a href="#">Download <b class="caret"></b></a></li>
-                        <li class="nav-item menu-large"><a href="#">About Us <b class="caret"></b></a></li>
-                        <li class="nav-item"><a href="javascript: void(0)">Contact Us<b class="caret"></b></a></li>
+                        <li class="nav-item active"><a href="../index.php" >Home <b class="caret"></b></a></li>
+                        <li class="nav-item menu-large"><a href="../about_us.php">About Us <b class="caret"></b></a></li>
+                        <li class="nav-item"><a href="../contact_us.php">Contact Us<b class="caret"></b></a></li>
                     </ul>
                 </div>
             </div>
@@ -113,7 +111,6 @@
                 <div class="col-lg-6">
                     <div class="box">
                         <h2 class="text-uppercase">Login</h2>
-                        <p style="color: red;">*Incorrect Email / Password entered</p>
                         <form method="post">
                             <div class="form-group">
                                 <label for="email">Email</label>

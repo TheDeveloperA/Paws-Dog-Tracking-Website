@@ -102,7 +102,13 @@ session_start();
             <section class="bar">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p class="lead">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                        <p class="lead">The Paws team is made up of university students who decided to create a way to track and monitor the dogs overall health. The team was formed in November 2017 with the development starting in January 2018.</p>
+
+                        <br>
+                        <br>
+                        <br>
+                        <h2>F.A.Q</h2>
+                        <br>
                     </div>
                 </div>
                 <div class="row">
@@ -110,39 +116,40 @@ session_start();
                         <div id="accordion" role="tablist">
                             <div class="card">
                                 <div id="headingOne" role="tab" class="card-header">
-                                    <h4 class="mb-0 mt-0"><a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Accordion Item No.1</a></h4>
+                                    <h4 class="mb-0 mt-0"><a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">What do I need?</a></h4>
                                 </div>
-                                <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" class="collapse show">
+                                <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" class="collapse">
                                     <div class="card-body">
 
-                                        <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
-                                        <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
-
+                                        <p>-You will need a FitBark device, this is needed to actually retrieve the data from your pet.</p>
+                                        <p>-The Paws mobile application.</p>
+                                        <p>-A pet!</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="card">
                                 <div id="headingTwo" role="tab" class="card-header">
-                                    <h4 class="mb-0 mt-0"><a data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">Accordion Item No.2</a></h4>
+                                    <h4 class="mb-0 mt-0"><a data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">How do I register an account?</a></h4>
                                 </div>
                                 <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion" class="collapse">
                                     <div class="card-body">
 
-                                        <p>It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops of rain could be heard hitting the pane, which made him feel quite sad.</p>
-                                        <p>It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops of rain could be heard hitting the pane, which made him feel quite sad.</p>
-
+                                        <p>You can only register an account through the mobile application, this was designed to ensure no fake accounts are created.</p>
 
                                     </div>
                                 </div>
                             </div>
                             <div class="card">
                                 <div id="headingThree" role="tab" class="card-header">
-                                    <h4 class="mb-0 mt-0"><a data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">Accordion Item No.3 A little too small</a></h4>
+                                    <h4 class="mb-0 mt-0"><a data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">What data is collected?</a></h4>
                                 </div>
                                 <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion" class="collapse">
                                     <div class="card-body">
-                                        <p>His room, a proper human room although a little too small, lay peacefully between its four familiar walls.</p>
-                                        <p>A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</p>
+                                        <p>Data from the Fitbark device, which includes the various activity data and also some information regarding the dog, which can include its name, age etc.
+                                            In addition, we also collect information regarding the account holder, which includes their name and email.
+                                            <br>
+                                            <br>
+                                            <strong>We do not sell your data!</strong>
                                     </div>
                                 </div>
                             </div>
