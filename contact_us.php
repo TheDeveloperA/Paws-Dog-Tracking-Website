@@ -114,7 +114,7 @@ session_start();
                         <div class="box-simple">
                             <div class="icon-outlined"><i class="fa fa-envelope"></i></div>
                             <h3 class="h4">Electronic support</h3>
-                            <p>Please feel free to write an email to us or to use our electronic ticketing system.</p>
+                            <p>Please feel free to write an email to us.</p>
                             <ul class="list-unstyled text-sm">
                                 <li><strong><a href="mailto:">paws@gmail.com</a></strong></li>
                             </ul>

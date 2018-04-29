@@ -13,7 +13,7 @@
         $emailAddress = mysqli_real_escape_string($db,$_POST['email']);
         $password = mysqli_real_escape_string($db,$_POST["pass"]);
 
-        $sql_query = "SELECT users_id FROM users WHERE users_email = '$emailAddress' AND users_pass = '$password'";
+        $sql_query = "SELECT user_id FROM user WHERE email = '$emailAddress' AND password = '$password'";
         $result = mysqli_query($db,$sql_query);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $active = $row['active'];
@@ -147,8 +147,9 @@
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
-                            <h2 class="display-4">We salute you!</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                            <h2 class="display-4">Promoting a healthy lifestyle for dogs</h2>
+                            <p> With the help of the FitBark, Paws can help encourage dog owners to help their dogs beat
+                            their best bark point score and also fulfill their daily goal.</p>
                         </div>
                     </div>
                 </div>
@@ -158,16 +159,16 @@
         <section>
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
                             <img class="img-fluid rounded-circle" src="img/puppy.png" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 order-lg-2">
                         <div class="p-5">
-                            <h2 class="text-uppercase">Monitor your dogs health</h2>
+                            <h2 class="display-4">Monitor your dogs health</h2>
                             <p class="lead mb-small">A healthy dog is a happy dog.</p>
-                            <p class="mb-small">With the use of the FitBark device, the Paws application can monitor the activity levels of your dog, whilst also logging in its meals. </p>
+                            <p class="mb-small">With the use of the FitBark device, the Paws application can monitor the activity levels of your dog. </p>
                         </div>
                     </div>
                 </div>

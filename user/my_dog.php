@@ -4,11 +4,11 @@ include("functions/database.php");
 
 session_start();
 
-$dog_info_array = getDogs(getEmailFromDB($_SESSION['login_user']));
+$dog_info_array = getDogs($_SESSION['login_user']);
 
-$dogName = $dog_info_array[2];
-$dogAge = $dog_info_array[3];
-$dogWeight = $dog_info_array[4];
+$dogName = $dog_info_array[1];
+$dogAge = $dog_info_array[2];
+$dogWeight = $dog_info_array[3];
 
 
 if (isset($_POST['save_info'])){
@@ -18,15 +18,15 @@ if (isset($_POST['save_info'])){
     $dogWeight = $_POST['form_dog_weight'];
 
     if (!empty($dogName)){
-        insertDogName(getEmailFromDB($_SESSION['login_user']),$dogName);
+        insertDogName($_SESSION['login_user'],$dogName);
     }
 
     if (!empty($dogAge)){
-        insertDogAge(getEmailFromDB($_SESSION['login_user']),$dogAge);
+        insertDogAge($_SESSION['login_user'],$dogAge);
     }
 
     if (!empty($dogWeight)){
-        insertDogWeight(getEmailFromDB($_SESSION['login_user']),$dogWeight);
+        insertDogWeight($_SESSION['login_user'],$dogWeight);
     }
 }
 

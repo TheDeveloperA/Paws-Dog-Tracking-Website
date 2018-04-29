@@ -14,24 +14,23 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
 
     /**
-     * @param $email_address - The email address of the User, where the dog is saved to.
+     * @param $id - The id of the User, where the dog is saved to.
      * @return array - Returns array of dogs registered to user.
      */
-    function getDogs($email_address){
+    function getDogs($id){
 
         global $db;
 
-        $sql_query = "SELECT * FROM dogs WHERE dogs_user_email = '$email_address' ";
+        $sql_query = "SELECT * FROM doginfo WHERE user_id = '$id' ";
         $result = mysqli_query($db,$sql_query);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-        $dogs_id = $row["dogs_id"];
-        $dogs_user_email = $row["dogs_user_email"];
-        $dogs_name = $row["dogs_name"];
-        $dogs_age = $row["dogs_age"];
-        $dogs_weight = $row["dogs_weight"];
+        $dogs_id = $row["user_id"];
+        $dogs_name = $row["dog_name"];
+        $dogs_age = $row["dog_age"];
+        $dogs_weight = $row["dog_weight"];
 
-        return array($dogs_id,$dogs_user_email,$dogs_name,$dogs_age,$dogs_weight);
+        return array($dogs_id,$dogs_name,$dogs_age,$dogs_weight);
     }
 
     /**
@@ -44,19 +43,18 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         $date = date(date("Y/m/d"));
 
-        $sql_query = "SELECT * FROM dogs_info WHERE dogs_info_dogs_identifier = '$id' AND dogs_date = '$date'";
+        $sql_query = "SELECT * FROM data WHERE user_id = '$id' AND timestamp = '$date'";
         $result = mysqli_query($db,$sql_query);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-        $dogs_info_id = $row["dogs_info_id"];
-        $dogs_info_dogs_identifier = $row["dogs_info_dogs_identifier"];
-        $dogs_hourly_average = $row["dogs_hourly_average"];
-        $dogs_min_play = $row["dogs_min_play"];
-        $dogs_min_active = $row["dogs_min_active"];
-        $dogs_min_rest = $row["dogs_min_rest"];
-        $dogs_date = $row["dogs_date"];
+        $dogs_info_dogs_identifier = $row["user_id"];
+        $dogs_hourly_average = $row["hourly_average"];
+        $dogs_min_play = $row["min_play"];
+        $dogs_min_active = $row["min_active"];
+        $dogs_min_rest = $row["min_rest"];
+        $dogs_date = $row["timestamp"];
 
-        return array($dogs_info_id,$dogs_info_dogs_identifier,$dogs_hourly_average,$dogs_min_play,$dogs_min_active,
+        return array($dogs_info_dogs_identifier,$dogs_hourly_average,$dogs_min_play,$dogs_min_active,
             $dogs_min_rest,$dogs_date);
     }
 
@@ -68,7 +66,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "SELECT SUM(dogs_min_play) FROM dogs_info WHERE dogs_info_dogs_identifier = '$id' AND dogs_date > CURRENT_DATE - INTERVAL '$noOfDays' DAY";
+        $sql_query = "SELECT SUM(min_play) FROM data WHERE user_id = '$id' AND timestamp > CURRENT_DATE - INTERVAL '$noOfDays' DAY";
 
         $result = mysqli_query($db,$sql_query);
 
@@ -87,7 +85,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "SELECT SUM(dogs_min_active) FROM dogs_info WHERE dogs_info_dogs_identifier = '$id' AND dogs_date > CURRENT_DATE - INTERVAL '$noOfDays' DAY";
+        $sql_query = "SELECT SUM(min_active) FROM data WHERE user_id = '$id' AND timestamp > CURRENT_DATE - INTERVAL '$noOfDays' DAY";
 
         $result = mysqli_query($db,$sql_query);
 
@@ -107,7 +105,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "SELECT SUM(dogs_min_rest) FROM dogs_info WHERE dogs_info_dogs_identifier = '$id' AND dogs_date > CURRENT_DATE - INTERVAL '$noOfDays' DAY";
+        $sql_query = "SELECT SUM(min_rest) FROM data WHERE user_id = '$id' AND timestamp > CURRENT_DATE - INTERVAL '$noOfDays' DAY";
 
         $result = mysqli_query($db,$sql_query);
 
@@ -127,7 +125,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "SELECT * FROM dogs_info WHERE dogs_info_dogs_identifier = '$id' AND dogs_date > CURRENT_DATE - INTERVAL '30' DAY ORDER BY dogs_date ASC";
+        $sql_query = "SELECT * FROM data WHERE user_id = '$id' AND timestamp > CURRENT_DATE - INTERVAL '30' DAY ORDER BY timestamp ASC";
 
         $result = mysqli_query($db,$sql_query);
 
@@ -146,14 +144,14 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "SELECT * FROM users WHERE users_id =  '$id' ";
+        $sql_query = "SELECT * FROM user WHERE user_id =  '$id' ";
         $result = mysqli_query($db,$sql_query);
 
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
         if ($row > 0){
 
-            $users_name = $row["users_name"];
+            $users_name = $row["name"];
 
             return $users_name;
 
@@ -168,14 +166,14 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "SELECT * FROM users WHERE users_id =  '$id' ";
+        $sql_query = "SELECT * FROM user WHERE user_id =  '$id' ";
         $result = mysqli_query($db,$sql_query);
 
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
         if ($row > 0){
 
-            $users_email = $row["users_email"];
+            $users_email = $row["email"];
 
             return $users_email;
 
@@ -191,14 +189,14 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "SELECT * FROM users WHERE users_email =  '$email_address' ";
+        $sql_query = "SELECT * FROM user WHERE email =  '$email_address' ";
         $result = mysqli_query($db,$sql_query);
 
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
         if ($row > 0){
 
-            $users_id = $row["users_id"];
+            $users_id = $row["user_id"];
 
             return $users_id;
 
@@ -212,7 +210,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "UPDATE users SET users_name = '$name' WHERE users_id = '$id'";
+        $sql_query = "UPDATE user SET name = '$name' WHERE user_id = '$id'";
 
         if (mysqli_query($db,$sql_query)){
             echo "saved";
@@ -225,7 +223,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "UPDATE users SET users_pass = '$pass' WHERE users_id = '$id'";
+        $sql_query = "UPDATE user SET password = '$pass' WHERE user_id = '$id'";
 
         if (mysqli_query($db,$sql_query)){
             echo "saved";
@@ -238,7 +236,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         global $db;
 
-        $sql_query = "UPDATE users SET users_email = '$new_email' WHERE  users_id = '$id'";
+        $sql_query = "UPDATE user SET email = '$new_email' WHERE  user_id = '$id'";
 
         if (mysqli_query($db,$sql_query)){
             echo "saved";
@@ -247,11 +245,11 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
         }
     }
 
-    function insertDogName($email_address, $dogs_name){
+    function insertDogName($id, $dogs_name){
 
         global $db;
 
-        $sql_query = "UPDATE dogs SET dogs_name = '$dogs_name' WHERE  dogs_user_email = '$email_address'";
+        $sql_query = "UPDATE doginfo SET dog_name = '$dogs_name' WHERE  user_id = '$id'";
 
         if (mysqli_query($db,$sql_query)){
             echo "saved";
@@ -260,11 +258,11 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
         }
     }
 
-    function insertDogAge($email_address, $dogs_age){
+    function insertDogAge($id, $dogs_age){
 
         global $db;
 
-        $sql_query = "UPDATE dogs SET dogs_age = '$dogs_age' WHERE  dogs_user_email = '$email_address'";
+        $sql_query = "UPDATE doginfo SET dog_age = '$dogs_age' WHERE  user_id = '$id'";
 
         if (mysqli_query($db,$sql_query)){
             echo "saved";
@@ -273,11 +271,11 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
         }
     }
 
-    function insertDogWeight($email_address, $dogs_weight){
+    function insertDogWeight($id, $dogs_weight){
 
         global $db;
 
-        $sql_query = "UPDATE dogs SET dogs_weight = '$dogs_weight' WHERE  dogs_user_email = '$email_address'";
+        $sql_query = "UPDATE doginfo SET dog_weight = '$dogs_weight' WHERE user_id = '$id'";
 
         if (mysqli_query($db,$sql_query)){
             echo "saved";

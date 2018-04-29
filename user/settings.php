@@ -122,22 +122,8 @@ if (isset($_POST['save_name'])){
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="password_old">Old password</label>
-                                        <input id="password_old" type="password" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label for="password_1">New password</label>
                                         <input id="password_1" type="password" class="form-control" name="form_pass">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="password_2">Retype new password</label>
-                                        <input id="password_2" type="password" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -187,12 +173,6 @@ if (isset($_POST['save_name'])){
                                         <input id="email_1" type="email" class="form-control" name="form_email">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="email_2">Retype new email</label>
-                                        <input id="email_2" type="email" class="form-control">
-                                    </div>
-                                </div>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-template-outlined" name="save_email">
@@ -236,25 +216,6 @@ if (isset($_POST['save_name'])){
     include ("../components/footer.php");
     ?>
 </div>
-<!-- Javascript files-->
-<!--<script>-->
-<!---->
-<!--//    TODO GET THE SUBMIT PASS BUTTON TO WORK TO CHECK BEFORE SUBMMITTING-->
-<!--    $('#save_pass').submit(function () {-->
-<!--        document.write("test");-->
-<!--        if (document.getElementById("password_1") === document.getElementById('password_2')){-->
-<!---->
-<!--            document.write("yeah boy");-->
-<!--            return true;-->
-<!---->
-<!--        }else {-->
-<!--            document.write("no boy");-->
-<!--            return false;-->
-<!--        }-->
-<!---->
-<!--    })-->
-<!---->
-<!--</script>-->
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/popper.js/umd/popper.min.js"> </script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>

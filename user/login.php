@@ -1,4 +1,3 @@
-<!--This File is / should only be called when user incorrectly enters details-->
 <?php
     include("includes/config.php");
     include ("functions/database.php");
@@ -12,7 +11,7 @@
             $emailAddress = mysqli_real_escape_string($db,$_POST['email']);
             $password = mysqli_real_escape_string($db,$_POST["pass"]);
 
-            $sql_query = "SELECT users_id FROM users WHERE users_email = '$emailAddress' AND users_pass = '$password'";
+            $sql_query = "SELECT user_id FROM user WHERE email = '$emailAddress' AND password = '$password'";
             $result = mysqli_query($db,$sql_query);
             $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
@@ -111,6 +110,8 @@
                 <div class="col-lg-6">
                     <div class="box">
                         <h2 class="text-uppercase">Login</h2>
+                        <br>
+                        <br>
                         <form method="post">
                             <div class="form-group">
                                 <label for="email">Email</label>

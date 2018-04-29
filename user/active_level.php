@@ -124,7 +124,7 @@ $minPlay = getDogsMinPlay($_SESSION['login_user'],1);
                         </div>
                     </div>
                     <?php
-                    if (empty($minRest)){
+                    if (empty($minRest) && empty($minPlay) && empty($minActive)){
                         echo "No data available";
                     }else{
                         echo '<canvas id="pie-chart" width="800" height="450"></canvas>';

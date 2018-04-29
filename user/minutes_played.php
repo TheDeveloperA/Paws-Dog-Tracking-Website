@@ -105,7 +105,13 @@ foreach ($array as $row){
                     <p>Here you can check out how many minutes your dog plays for!
                         You can access legacy information as well as check out the current days progress</p>
                     <br>
-                    <canvas id="line-chart" width="800" height="450"></canvas>
+                    <?php
+                    if (empty($minRest) && empty($minPlay) && empty($minActive)){
+                        echo "No data available";
+                    }else{
+                        echo '<canvas id="line-chart" width="800" height="450"></canvas>';
+                    }
+                    ?>
                     <br>
                     <br>
                     <br>
