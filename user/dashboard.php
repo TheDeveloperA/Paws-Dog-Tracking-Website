@@ -1,325 +1,183 @@
 <?php
 
-include "includes/session.php";
+include "functions/database.php";
+
+session_start();
+
+$minActive = getDogsMinActiveToday($_SESSION['login_user']);
+$minRest = getDogsMinRestToday($_SESSION['login_user']);
+$minPlay = getDogsMinPlayToday($_SESSION['login_user']);
 
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Universal - All In 1 Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Roboto-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700">
+    <!-- Bootstrap Select-->
+    <link rel="stylesheet" href="../vendor/bootstrap-select/css/bootstrap-select.min.css">
+    <!-- owl carousel-->
+    <link rel="stylesheet" href="../vendor/owl.carousel/assets/owl.carousel.css">
+    <link rel="stylesheet" href="../vendor/owl.carousel/assets/owl.theme.default.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="../css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="../css/custom.css">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]><!---->
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<!--    CDN for Charts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+</head>
+<body>
+<div id="all">
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+    <?php
+    if (empty($_SESSION['login_user'])){
+        header("location: login.php");
+    }
+    ?>
 
-        <title>Dashboard Template for Bootstrap</title>
+    <?php
+    include ("../components/top_bar.php");
+    ?>
+    <!-- Navbar Start-->
+    <header class="nav-holder make-sticky">
+        <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
+            <div class="container"><a href="../index.php" class="navbar-brand home">
+                    <img src="../img/paws_banner.png" alt="Universal logo" class="d-none d-md-inline-block">
+                    <img src="../img/paws-banner-small.png" alt="Universal logo" class="d-inline-block d-md-none">
+                    <span class="sr-only">Universal - go to homepage</span></a>
 
-        <!-- Bootstrap core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Custom fonts for this template -->
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+                <button type="button" data-toggle="collapse" data-target="#navigation"
+                        class="navbar-toggler btn-template-outlined">
+                    <span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
 
-<!--        <!-- Custom styles for this template -->
-        <link href="styles/dashboard.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="../css/one-page-wonder.min.css" rel="stylesheet">
-    </head>
-
-    <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Paws Dog Tracker</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Log Out</a>
-                    </li>
-                </ul>
+                <div id="navigation" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item"><a href="../index.php" >Home <b class="caret"></b></a></li>
+                        <li class="nav-item menu-large"><a href="../about_us.php">About Us <b class="caret"></b></a></li>
+                        <li class="nav-item"><a href="../contact_us.php">Contact Us<b class="caret"></b></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </nav>
+    </header>
+    <!-- Navbar End-->
 
-        <div class="container-fluid">
-            <div class="row">
-                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                    <div class="sidebar-sticky">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">
-                                    <span data-feather="home"></span>
-                                    Dashboard <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file"></span>
-                                    Orders
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="shopping-cart"></span>
-                                    Products
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="users"></span>
-                                    Customers
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="bar-chart-2"></span>
-                                    Reports
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="layers"></span>
-                                    Integrations
-                                </a>
-                            </li>
-                        </ul>
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row d-flex align-items-center flex-wrap">
+                <div class="col-md-7">
+                    <h1 class="h2">My Account</h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="breadcrumb d-flex justify-content-end">
+                        <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+                        <li class="breadcrumb-item active">My Account</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                            <span>Saved reports</span>
-                            <a class="d-flex align-items-center text-muted" href="#">
-                                <span data-feather="plus-circle"></span>
-                            </a>
-                        </h6>
-                        <ul class="nav flex-column mb-2">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Current month
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Last quarter
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Social engagement
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Year-end sale
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+    <div id="content">
+        <div class="container">
+            <div class="row bar">
+                <div id="customer-account" class="col-lg-9 clearfix">
 
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                        <h1 class="h2">Dashboard</h1>
-                        <div class="btn-toolbar mb-2 mb-md-0">
-                            <div class="btn-group mr-2">
-                                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                                <button class="btn btn-sm btn-outline-secondary">Export</button>
-                            </div>
-                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                                <span data-feather="calendar"></span>
-                                This week
-                            </button>
+                    <p>Hello <?php echo getNameFromDB($_SESSION['login_user'])?>, from the dashboard you can monitor your dogs activity and see how many bark
+                    points they have earned.</p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <?php
+                    if (empty($minRest) && empty($minPlay) && empty($minActive)){
+                        echo "No data available";
+                    }else{
+                        echo '<canvas id="pie-chart" width="800" height="450"></canvas>';
+                    }
+                    ?>
+                    <br>
+
+                </div>
+                <div class="col-lg-3 mt-4 mt-lg-0">
+                    <!-- CUSTOMER MENU -->
+                    <div class="panel panel-default sidebar-menu">
+                        <div class="panel-heading">
+                            <h3 class="h4 panel-title">Customer section</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills flex-column text-sm">
+                                <li class="nav-item"><a href="dashboard.php" class="nav-link active"><i class="fa fa-list"></i> My Account</a></li>
+                                <li class="nav-item"><a href="my_dog.php" class="nav-link"><i class="fa fa-hand-o-up"></i> My Dog</a> </li>
+                                <li class="nav-item"><a href="settings.php" class="nav-link"><i class="fa fa-cog"></i> Settings</a></li>
+                                <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out"></i> Log out</a> </li>
+                            </ul>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="panel-heading">
+                            <h3 class="h4 panel-title">My Dogs Statistics</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills flex-column text-sm">
+                                <li class="nav-item"><a href="active_level.php" class="nav-link"><i class="fa fa-pie-chart"></i> Active Level</a></li>
+                                <li class="nav-item"><a href="minutes_played.php" class="nav-link"><i class="fa fa-line-chart"></i> Minutes Played</a> </li>
+                                <li class="nav-item"><a href="minutes_rest.php" class="nav-link"><i class="fa fa-bar-chart"></i> Minutes Rest</a></li>
+                            </ul>
                         </div>
                     </div>
-
-                    <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
-
-                    <h2>Section title</h2>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>amet</td>
-                                <td>consectetur</td>
-                                <td>adipiscing</td>
-                                <td>elit</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>Integer</td>
-                                <td>nec</td>
-                                <td>odio</td>
-                                <td>Praesent</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>libero</td>
-                                <td>Sed</td>
-                                <td>cursus</td>
-                                <td>ante</td>
-                            </tr>
-                            <tr>
-                                <td>1,004</td>
-                                <td>dapibus</td>
-                                <td>diam</td>
-                                <td>Sed</td>
-                                <td>nisi</td>
-                            </tr>
-                            <tr>
-                                <td>1,005</td>
-                                <td>Nulla</td>
-                                <td>quis</td>
-                                <td>sem</td>
-                                <td>at</td>
-                            </tr>
-                            <tr>
-                                <td>1,006</td>
-                                <td>nibh</td>
-                                <td>elementum</td>
-                                <td>imperdiet</td>
-                                <td>Duis</td>
-                            </tr>
-                            <tr>
-                                <td>1,007</td>
-                                <td>sagittis</td>
-                                <td>ipsum</td>
-                                <td>Praesent</td>
-                                <td>mauris</td>
-                            </tr>
-                            <tr>
-                                <td>1,008</td>
-                                <td>Fusce</td>
-                                <td>nec</td>
-                                <td>tellus</td>
-                                <td>sed</td>
-                            </tr>
-                            <tr>
-                                <td>1,009</td>
-                                <td>augue</td>
-                                <td>semper</td>
-                                <td>porta</td>
-                                <td>Mauris</td>
-                            </tr>
-                            <tr>
-                                <td>1,010</td>
-                                <td>massa</td>
-                                <td>Vestibulum</td>
-                                <td>lacinia</td>
-                                <td>arcu</td>
-                            </tr>
-                            <tr>
-                                <td>1,011</td>
-                                <td>eget</td>
-                                <td>nulla</td>
-                                <td>Class</td>
-                                <td>aptent</td>
-                            </tr>
-                            <tr>
-                                <td>1,012</td>
-                                <td>taciti</td>
-                                <td>sociosqu</td>
-                                <td>ad</td>
-                                <td>litora</td>
-                            </tr>
-                            <tr>
-                                <td>1,013</td>
-                                <td>torquent</td>
-                                <td>per</td>
-                                <td>conubia</td>
-                                <td>nostra</td>
-                            </tr>
-                            <tr>
-                                <td>1,014</td>
-                                <td>per</td>
-                                <td>inceptos</td>
-                                <td>himenaeos</td>
-                                <td>Curabitur</td>
-                            </tr>
-                            <tr>
-                                <td>1,015</td>
-                                <td>sodales</td>
-                                <td>ligula</td>
-                                <td>in</td>
-                                <td>libero</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </main>
+                </div>
             </div>
         </div>
+    </div>
+    <?php
+    include ("../components/footer.php");
+    ?>
+</div>
+<!-- Javascript files-->
+<script>
+    new Chart(document.getElementById("pie-chart"), {
+        type: 'pie',
+        data: {
+            labels: ["Minutes Played", "Minutes Active", "Minutes Rested"],
+            datasets: [{
+                label: "Active Level",
+                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+                data: [<?php echo $minPlay?>,<?php echo $minActive?>,<?php echo $minRest?>]
 
-        <!-- Footer -->
-        <footer class="py-5 bg-black">
-            <div class="container">
-                <p class="m-0 text-center text-white small">Copyright &copy; Paws Dog Tracker 2018</p>
-            </div>
-            <!-- /.container -->
-        </footer>
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Activity Level: Today'
+            }
+        }
+    });
+</script>
 
-        <!-- Bootstrap core JavaScript
-           ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-        <script src="../../../../assets/js/vendor/popper.min.js"></script>
-        <script src="../../../../dist/js/bootstrap.min.js"></script>
-
-        <!-- Icons -->
-        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-        <script>feather.replace()</script>
-
-            <!-- Graphs -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-        <script>
-            var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                    datasets: [{
-                        data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-                        lineTension: 0,
-                        backgroundColor: 'transparent',
-                        borderColor: '#007bff',
-                        borderWidth: 4,
-                        pointBackgroundColor: '#007bff'
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: false
-                            }
-                        }]
-                    },
-                    legend: {
-                        display: false,
-                    }
-                }
-            });
-        </script>
-    </body>
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/popper.js/umd/popper.min.js"> </script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="../vendor/waypoints/lib/jquery.waypoints.min.js"> </script>
+<script src="../vendor/jquery.counterup/jquery.counterup.min.js"> </script>
+<script src="../vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="../vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
+<script src="../vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="../vendor/jquery.scrollto/jquery.scrollTo.min.js"></script>
+</body>
 </html>
