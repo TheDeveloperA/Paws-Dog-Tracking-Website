@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5e093451-45de-489e-a688-85aa8321d1b1" name="Xampp" url="http://localhost/">
+        <fileTransfer port="0" mountedRoot="C:\Xampp2\htdocs" accessType="MOUNT" />
+      </webServer>
+      <webServer id="6de54941-0302-475b-888f-9a88a0b14a5d" name="Gregs Server" url="http://ftp.theweekendmatters.com">
+        <fileTransfer host="ftp.theweekendmatters.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
