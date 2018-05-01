@@ -2,18 +2,22 @@
 include "functions/database.php";
 session_start();
 
-$array = getDogsDataFor30days($_SESSION['login_user']);
+$array = getDogsData($_SESSION['login_user'], 30);
 
 $index = 0;
 
 foreach ($array as $row){
 
-    $minutesRestArray[$index] = $row[5];
-    $minutesRestDates[$index] = $row[6];
+    $date = $row[5];
+    $date = new DateTime($date);
+
+    $minutesRestArray[$index] = $row[4];
+    $minutesRestDates[$index] = $date->format('Y-m-d');
 
     $index++;
 
 }
+
 //TODO the array contains all the data for last 30 days, add to the chart, perhaps loop through and append.
 ?>
 
@@ -108,7 +112,7 @@ foreach ($array as $row){
                         You can access legacy information as well as check out the current days progress</p>
                     <br>
                     <?php
-                    if (empty($minRest) && empty($minPlay) && empty($minActive)){
+                    if (empty($minutesRestDates) || empty($minutesRestArray)){
                         echo "No data available";
                     }else{
                         echo '<canvas id="bar-chart" width="800" height="450"></canvas>';

@@ -3,9 +3,20 @@ include ("functions/database.php");
 
 session_start();
 
-$minActive = getDogsMinActive($_SESSION['login_user'],30);
-$minRest = getDogsMinRest($_SESSION['login_user'],30);
-$minPlay = getDogsMinPlay($_SESSION['login_user'],30);
+$array = getDogsData($_SESSION['login_user'], 30);
+
+$index = 0;
+
+$minActive = 0;
+$minRest = 0;
+$minPlay = 0;
+
+foreach ($array as $row){
+
+    $minActive += $row[3];
+    $minRest += $row[4];
+    $minPlay += $row[2];
+}
 
 ?>
 

@@ -3,11 +3,9 @@ include ("functions/database.php");
 
 session_start();
 
-$minActive = getDogsMinActive($_SESSION['login_user'],1);
-$minRest = getDogsMinRest($_SESSION['login_user'],1);
-$minPlay = getDogsMinPlay($_SESSION['login_user'],1);
-
-
+$minActive = getDogsMinActiveToday($_SESSION['login_user']);
+$minRest = getDogsMinRestToday($_SESSION['login_user']);
+$minPlay = getDogsMinPlayToday($_SESSION['login_user']);
 ?>
 
 <!DOCTYPE html>
@@ -174,9 +172,6 @@ $minPlay = getDogsMinPlay($_SESSION['login_user'],1);
 </div>
 <!-- Javascript files-->
 <script>
-
-    //  return array($dogs_info_id,$dogs_info_dogs_identifier,$dogs_hourly_average,$dogs_min_play,$dogs_min_active,
-    //            $dogs_min_rest,$dogs_date);
 
     new Chart(document.getElementById("pie-chart"), {
         type: 'pie',

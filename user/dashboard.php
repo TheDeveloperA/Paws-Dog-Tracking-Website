@@ -3,6 +3,11 @@
 include "functions/database.php";
 
 session_start();
+
+$minActive = getDogsMinActiveToday($_SESSION['login_user']);
+$minRest = getDogsMinRestToday($_SESSION['login_user']);
+$minPlay = getDogsMinPlayToday($_SESSION['login_user']);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -94,13 +99,17 @@ session_start();
                     <p>Hello <?php echo getNameFromDB($_SESSION['login_user'])?>, from the dashboard you can monitor your dogs activity and see how many bark
                     points they have earned.</p>
                     <br>
-                    <canvas id="pie-chart" width="800" height="450"></canvas>
                     <br>
                     <br>
                     <br>
+                    <?php
+                    if (empty($minRest) && empty($minPlay) && empty($minActive)){
+                        echo "No data available";
+                    }else{
+                        echo '<canvas id="pie-chart" width="800" height="450"></canvas>';
+                    }
+                    ?>
                     <br>
-                    <h4>Bark Points Target: 5000</h4>
-                    <h4>Bark Points Gained Today: 4843</h4>
 
                 </div>
                 <div class="col-lg-3 mt-4 mt-lg-0">
@@ -145,9 +154,10 @@ session_start();
         data: {
             labels: ["Minutes Played", "Minutes Active", "Minutes Rested"],
             datasets: [{
-                label: "Population (millions)",
+                label: "Active Level",
                 backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-                data: [240,75,400]
+                data: [<?php echo $minPlay?>,<?php echo $minActive?>,<?php echo $minRest?>]
+
             }]
         },
         options: {

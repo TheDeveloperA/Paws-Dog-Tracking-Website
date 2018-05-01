@@ -3,9 +3,20 @@ include ("functions/database.php");
 
 session_start();
 
-$minActive = getDogsMinActive($_SESSION['login_user'],7);
-$minRest = getDogsMinRest($_SESSION['login_user'],7);
-$minPlay = getDogsMinPlay($_SESSION['login_user'],7);
+$array = getDogsData($_SESSION['login_user'], 7);
+
+$index = 0;
+
+$minActive = 0;
+$minRest = 0;
+$minPlay = 0;
+
+foreach ($array as $row){
+
+    $minActive += $row[3];
+    $minRest += $row[4];
+    $minPlay += $row[2];
+}
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +131,7 @@ $minPlay = getDogsMinPlay($_SESSION['login_user'],7);
                         </div>
                     </div>
                     <?php
-                    if (empty($minRest) && empty($minPlay) && empty($minActive)){
+                    if ($minRest == 0 && $minPlay == 0 && $minActive == 0){
                         echo "No data available";
                     }else{
                         echo '<canvas id="pie-chart" width="800" height="450"></canvas>';

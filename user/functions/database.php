@@ -62,11 +62,11 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
      * @param $id - The ID of the dog, used to retrieve all data for the dog
      * @return array - Returns array of data for the dog.
      */
-    function getDogsMinPlay($id,$noOfDays){
+    function getDogsMinPlayToday($id){
 
         global $db;
 
-        $sql_query = "SELECT SUM(min_play) FROM data WHERE user_id = '$id' AND timestamp > CURRENT_DATE - INTERVAL '$noOfDays' DAY";
+        $sql_query = "SELECT * FROM data WHERE user_id = '$id' AND date(timestamp) = curdate() order by timestamp desc limit 1";
 
         $result = mysqli_query($db,$sql_query);
 
@@ -75,17 +75,38 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
         }else{
 
             $row = mysqli_fetch_row($result);
-            $sum = $row[0];
+            $sum = $row[2];
         }
 
         return $sum;
     }
 
-    function getDogsMinActive($id,$noOfDays){
+    function getDogsMinActiveToday($id){
 
         global $db;
 
-        $sql_query = "SELECT SUM(min_active) FROM data WHERE user_id = '$id' AND timestamp > CURRENT_DATE - INTERVAL '$noOfDays' DAY";
+        $sql_query = "SELECT * FROM data where user_id = '$id' and date(timestamp) = curdate() order  by timestamp desc limit 1";
+
+        $result = mysqli_query($db,$sql_query);
+
+        if ($result === FALSE){
+            $sum = -1;
+        }else{
+
+            $row = mysqli_fetch_array($result);
+            $sum = $row[3];
+
+        }
+
+        return $sum;
+
+    }
+
+    function getDogsMinRestToday($id){
+
+        global $db;
+
+        $sql_query = "SELECT * FROM data WHERE user_id = '$id' AND date(timestamp) = curdate() order by timestamp desc limit 1";
 
         $result = mysqli_query($db,$sql_query);
 
@@ -94,44 +115,39 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
         }else{
 
             $row = mysqli_fetch_row($result);
-            $sum = $row[0];
+            $sum = $row[4];
         }
 
         return $sum;
 
     }
 
-    function getDogsMinRest($id,$noOfDays){
+    function getDogsData($id,$noOfDays){
 
         global $db;
 
-        $sql_query = "SELECT SUM(min_rest) FROM data WHERE user_id = '$id' AND timestamp > CURRENT_DATE - INTERVAL '$noOfDays' DAY";
+        $array[0] = -1;
 
-        $result = mysqli_query($db,$sql_query);
+        for ($index = 0; $index < $noOfDays; $index++){
 
-        if ($result === FALSE){
-            $sum = -1;
-        }else{
+            $sql_query = "SELECT * FROM data WHERE user_id = '$id' AND date(timestamp) = DATE_ADD(curdate(), INTERVAL  - '$index' DAY ) ORDER BY timestamp desc limit 1";
 
-            $row = mysqli_fetch_row($result);
-            $sum = $row[0];
+            $result = mysqli_query($db,$sql_query);
+
+            if ($result === FALSE){
+                echo "-1";
+            }else{
+
+                $row = mysqli_fetch_row($result);
+
+                if (!empty($row)){
+
+                    $array[$index] = $row;
+                }
+            }
         }
 
-        return $sum;
-
-    }
-
-    function getDogsDataFor30days($id){
-
-        global $db;
-
-        $sql_query = "SELECT * FROM data WHERE user_id = '$id' AND timestamp > CURRENT_DATE - INTERVAL '30' DAY ORDER BY timestamp ASC";
-
-        $result = mysqli_query($db,$sql_query);
-
-        $rows =  mysqli_fetch_all($result);
-
-        return $rows;
+        return $array;
 
     }
 
