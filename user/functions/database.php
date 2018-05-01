@@ -228,11 +228,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         $sql_query = "UPDATE user SET name = '$name' WHERE user_id = '$id'";
 
-        if (mysqli_query($db,$sql_query)){
-            echo "saved";
-        }else{
-            echo "error";
-        }
+        mysqli_query($db,$sql_query);
     }
 
     function insertNewPass($id,$pass){
@@ -241,11 +237,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         $sql_query = "UPDATE user SET password = '$pass' WHERE user_id = '$id'";
 
-        if (mysqli_query($db,$sql_query)){
-            echo "saved";
-        }else{
-            echo "error";
-        }
+        mysqli_query($db,$sql_query);
     }
 
     function insertNewEmail($id,$new_email){
@@ -254,11 +246,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         $sql_query = "UPDATE user SET email = '$new_email' WHERE  user_id = '$id'";
 
-        if (mysqli_query($db,$sql_query)){
-            echo "saved";
-        }else{
-            echo "error";
-        }
+        mysqli_query($db,$sql_query);
     }
 
     function insertDogName($id, $dogs_name){
@@ -267,11 +255,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         $sql_query = "UPDATE doginfo SET dog_name = '$dogs_name' WHERE  user_id = '$id'";
 
-        if (mysqli_query($db,$sql_query)){
-            echo "saved";
-        }else{
-            echo "error";
-        }
+        mysqli_query($db,$sql_query);
     }
 
     function insertDogAge($id, $dogs_age){
@@ -280,11 +264,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         $sql_query = "UPDATE doginfo SET dog_age = '$dogs_age' WHERE  user_id = '$id'";
 
-        if (mysqli_query($db,$sql_query)){
-            echo "saved";
-        }else{
-            echo "error";
-        }
+        mysqli_query($db,$sql_query);
     }
 
     function insertDogWeight($id, $dogs_weight){
@@ -293,11 +273,7 @@ require ($_SERVER['DOCUMENT_ROOT']."/Project/user/includes/config.php");
 
         $sql_query = "UPDATE doginfo SET dog_weight = '$dogs_weight' WHERE user_id = '$id'";
 
-        if (mysqli_query($db,$sql_query)){
-            echo "saved";
-        }else{
-            echo "error";
-        }
+        mysqli_query($db,$sql_query);
     }
 
 
